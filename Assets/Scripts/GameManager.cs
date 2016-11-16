@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class GameManager : Singletone<GameManager> {
+public class GameManager : MonoBehaviour {
 
-	// Awake is called when the script instance is being loaded
-	public void Awake() {
+	// Use this for initialization
+	void Start() {
 
 	}
 
-	// Update is called every frame, if the MonoBehaviour is enabled
-	public void Update() {
-
-	}
-
-	// Start is called just before any of the Update methods is called the first time
-	public void Start() {
+	// Update is called once per frame
+	void Update() {
 
 	}
 }
