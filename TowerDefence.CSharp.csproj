@@ -70,12 +70,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Algoritms\EventManager.cs" />
     <Compile Include="Assets\Scripts\Algoritms\Settings.cs" />
+    <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\Scripts\Map\Point.cs" />
     <Compile Include="Assets\Scripts\Map\Tile.cs" />
     <Compile Include="Assets\Scripts\Map\TileType.cs" />
+    <Compile Include="Assets\Scripts\TileScript.cs" />
     <Compile Include="Assets\Scripts\Utils\ArrayExtensions.cs" />
     <Compile Include="Assets\Scripts\Utils\Log.cs" />
     <Compile Include="Assets\Scripts\Utils\Singletone.cs" />

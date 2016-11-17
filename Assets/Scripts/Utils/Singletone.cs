@@ -1,25 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
 
 public abstract class Singletone<T> where T : Singletone<T>, new() {
-	private static T _instance;
-	public static T Instance {
-		get {
-			if (_instance == null)
-				_instance = new T().Init();
+   private static T _instance;
 
-			return _instance;
-		}
-	}
+   public static T Instance {
+      get {
+         if (_instance == null)
+            _instance = new T().Init();
 
-	public abstract T Init();
-	private Guid _uid;
+         return _instance;
+      }
+   }
 
-	public Singletone() {
-		_uid = Guid.NewGuid();
-		var type = GetType();
+   public abstract T Init();
 
-		Log.Info("Created " + type.Name + " [" + _uid.ToString() + "]");
-	}
+   private Guid _uid;
+
+   public Singletone() {
+      _uid = Guid.NewGuid();
+      var type = GetType();
+
+      Log.Info("Created " + type.Name + " [" + _uid.ToString() + "]");
+   }
 }

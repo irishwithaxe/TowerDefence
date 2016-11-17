@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿public class EventManager : Singletone<EventManager> {
 
-public class EventManager : Singletone<EventManager> {
-	public override EventManager Init() {
-		return this;
-	}
+   public override EventManager Init() {
+      return this;
+   }
 }

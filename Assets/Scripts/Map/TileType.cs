@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public enum TileType {
-	wall,
-	floor,
+﻿public enum TileType {
+   wall,
+   floor,
 }

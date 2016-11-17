@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class TileScript : MonoBehaviour {
+   public Tile Tile { get; set; }
+
+   public Vector3 WorldPosition { get; set; }
 
    // Use this for initialization
    private void Start() {
