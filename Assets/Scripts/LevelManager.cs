@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using GameCore;
+using System;
 
 public class LevelManager : MonoBehaviour {
+
+   [SerializeField]
+   private GameObject character = null;
 
    [SerializeField]
    private GameObject[] floors = null;
@@ -49,9 +53,9 @@ public class LevelManager : MonoBehaviour {
       for (var r = 0; r < rows; r++)
          for (var c = 0; c < cols; c++) {
             var tile = MapManager.Instance.Map[r, c];
-            var sprite = GetSprite(tile);
+            var mapPrefab = GetMapPrefab(tile);
             var worldPos = GetWorldPosition(tile.Position);
-            var gameobj = Instantiate(sprite, worldPos, Quaternion.identity, mapParentObject.transform) as GameObject;
+            var gameobj = Instantiate(mapPrefab, worldPos, Quaternion.identity, mapParentObject.transform) as GameObject;
 
             var goTile = gameobj.GetComponent<TileScript>();
             goTile.Tile = tile;
@@ -68,7 +72,7 @@ public class LevelManager : MonoBehaviour {
       return lt;
    }
 
-   private GameObject GetSprite(Tile tile) {
+   private GameObject GetMapPrefab(Tile tile) {
       switch (tile.Type) {
          case TileType.wall:
             return walls.GetRandomItem();
@@ -85,6 +89,18 @@ public class LevelManager : MonoBehaviour {
    private void Start() {
       FIllMap();
       SetCameraLimits();
+      PlaceCharacter();
+   }
+
+   private void PlaceCharacter() {
+      var tile = MapManager.Instance.Map[3, 3];
+      var characterPrefab = character;
+      var worldPos = GetWorldPosition(tile.Position);
+      var gameobj = Instantiate(characterPrefab, worldPos, Quaternion.identity) as GameObject;
+
+      var goTile = gameobj.GetComponent<CharacterScript>();
+      goTile.Tile = tile;
+      goTile.WorldPosition = worldPos;
    }
 
    // Update is called once per frame

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\CharacterScript.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\TileScript.cs" />
