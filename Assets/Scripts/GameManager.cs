@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using GameCore;
 
 public class GameManager : MonoBehaviour {
 
@@ -8,7 +7,7 @@ public class GameManager : MonoBehaviour {
       EventManager.Instance.OnTileClicked += EventManager_OnTileClicked;
    }
 
-   private void EventManager_OnTileClicked(object sender, GameCore.Events.TileClickEvent gameEvent) {
+   private void EventManager_OnTileClicked(object sender, TileClickEvent gameEvent) {
       Log.Info("clicked " + gameEvent.tile.Position.ToString());
    }
 

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GameCore;
 using System;
 
 public class CharacterScript : MonoBehaviour {
@@ -13,7 +12,7 @@ public class CharacterScript : MonoBehaviour {
       EventManager.Instance.OnTileClicked += EventManager_OnTileClicked;
    }
 
-   private void EventManager_OnTileClicked(object sender, GameCore.Events.TileClickEvent gameEvent) {
+   private void EventManager_OnTileClicked(object sender, TileClickEvent gameEvent) {
       TrySetGoal(gameEvent.tile);
    }
 

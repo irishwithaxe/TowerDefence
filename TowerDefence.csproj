@@ -64,11 +64,21 @@
     <Reference Include="Mono.Cecil">
       <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="GameCore">
-      <HintPath>Assets\Scripts\DLL&apos;s\GameCore.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Core\AStar.cs" />
+    <Compile Include="Assets\Core\EventManager.cs" />
+    <Compile Include="Assets\Core\Events\GameCoreEvent.cs" />
+    <Compile Include="Assets\Core\Events\MouseClickEvent.cs" />
+    <Compile Include="Assets\Core\Events\TileClickEvent.cs" />
+    <Compile Include="Assets\Core\Extensions\ArrayExtensions.cs" />
+    <Compile Include="Assets\Core\Extensions\StringExtensions.cs" />
+    <Compile Include="Assets\Core\Log.cs" />
+    <Compile Include="Assets\Core\MapManager.cs" />
+    <Compile Include="Assets\Core\Point.cs" />
+    <Compile Include="Assets\Core\Singletone.cs" />
+    <Compile Include="Assets\Core\Tile.cs" />
+    <Compile Include="Assets\Core\TileType.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\CharacterScript.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
