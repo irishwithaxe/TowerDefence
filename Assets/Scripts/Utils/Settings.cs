@@ -1,4 +1,4 @@
-﻿public class Settings : Singletone<Settings> {
+﻿public class Settings : GameCore.Singletone<Settings> {
    public Settings() {
    }
 

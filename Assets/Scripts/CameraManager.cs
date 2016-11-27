@@ -23,6 +23,7 @@ public class CameraManager : MonoBehaviour {
 
    // Use this for initialization
    private void Start() {
+      
    }
 
    public void SetLimits(Vector3 topLeft, Vector3 bottomRight) {

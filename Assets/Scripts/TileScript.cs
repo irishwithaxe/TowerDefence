@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameCore;
+using UnityEngine;
 
 public class TileScript : MonoBehaviour {
    public Tile Tile { get; set; }

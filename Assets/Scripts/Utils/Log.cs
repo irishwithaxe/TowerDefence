@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using UnityEngine;
+using GameCore;
 
 public static class Log {
    [MethodImpl(MethodImplOptions.NoInlining)]

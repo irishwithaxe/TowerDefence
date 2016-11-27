@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using GameCore;
 
 public class LevelManager : MonoBehaviour {
 
