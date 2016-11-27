@@ -40,19 +40,19 @@ public class MovingObject : MonoBehaviour {
       IsActive = true;
    }
 
-   protected bool TrySetGoal(Tile tile) {
+   protected bool TrySetGoal(Tile tile, Func<Tile, bool> walkable) {
       if (CurrentTile == tile)
          return false;
 
-      var path = AStar.GetPath(CurrentTile, tile, (t) => { return true; });
+      var path = AStar.GetPath(CurrentTile, tile, walkable);
       if (path == null)
          return false;
 
-      Path = path;
-      GoalTile = tile;
-      GoalPosition = LevelManager.GetWorldPosition(GoalTile.Position);
       pathPos = 0;
-      StepToPos(pathPos);
+      Path = path;
+      //GoalTile = tile;
+      //GoalPosition = LevelManager.GetWorldPosition(GoalTile.Position);
+      NextStep(pathPos);
       return true;
    }
 
@@ -65,11 +65,11 @@ public class MovingObject : MonoBehaviour {
       if (transform.position.x == GoalPosition.x && transform.position.y == GoalPosition.y) {
          pathPos++;
          if (pathPos < Path.Length)
-            StepToPos(pathPos);
+            NextStep(pathPos);
       }
    }
 
-   private void StepToPos(int pos) {
+   private void NextStep(int pos) {
       var newPos = Path[pos];
 
       if (movingType == 0)

@@ -9,7 +9,8 @@ public class CharacterScript : MovingObject {
    }
 
    private void EventManager_OnTileClicked(object sender, TileClickEvent gameEvent) {
-      TrySetGoal(gameEvent.tile);
+      if (gameEvent.tile.Type == TileType.floor)
+         TrySetGoal(gameEvent.tile, (t) => t.Type == TileType.floor ? true : false);
    }
 
    // Update is called once per frame
