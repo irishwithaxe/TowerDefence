@@ -73,7 +73,6 @@
     <Compile Include="Assets\Core\Events\TileClickEvent.cs" />
     <Compile Include="Assets\Core\Extensions\ArrayExtensions.cs" />
     <Compile Include="Assets\Core\Extensions\StringExtensions.cs" />
-    <Compile Include="Assets\Core\Log.cs" />
     <Compile Include="Assets\Core\MapManager.cs" />
     <Compile Include="Assets\Core\Point.cs" />
     <Compile Include="Assets\Core\Singletone.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Assets\Scripts\CharacterScript.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\MovingObject.cs" />
     <Compile Include="Assets\Scripts\TileScript.cs" />
     <Compile Include="Assets\Scripts\Utils\Log.cs" />
     <Compile Include="Assets\Scripts\Utils\Settings.cs" />

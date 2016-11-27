@@ -98,8 +98,7 @@ public class LevelManager : MonoBehaviour {
       var gameobj = Instantiate(characterPrefab, worldPos, Quaternion.identity) as GameObject;
 
       var goTile = gameobj.GetComponent<CharacterScript>();
-      goTile.Tile = tile;
-      goTile.WorldPosition = worldPos;
+      goTile.Place(tile);
    }
 
    // Update is called once per frame

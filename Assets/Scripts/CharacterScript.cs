@@ -2,11 +2,7 @@
 using System.Collections;
 using System;
 
-public class CharacterScript : MonoBehaviour {
-   public Tile Tile { get; set; }
-
-   public Vector3 WorldPosition { get; set; }
-
+public class CharacterScript : MovingObject {
    // Use this for initialization
    void Start() {
       EventManager.Instance.OnTileClicked += EventManager_OnTileClicked;
@@ -16,12 +12,8 @@ public class CharacterScript : MonoBehaviour {
       TrySetGoal(gameEvent.tile);
    }
 
-   private void TrySetGoal(Tile tile) {
-      
-   }
-
    // Update is called once per frame
    void Update() {
-
+      Move();
    }
 }

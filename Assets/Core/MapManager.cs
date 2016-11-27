@@ -12,7 +12,7 @@ public class MapManager : Singletone<MapManager> {
 
    public void MakeMap() {
       var mapmask = map1;
-      Func<uint, uint, TileType> _getType = (row, col) => {
+      Func<int, int, TileType> _getType = (row, col) => {
          var ttype = mapmask[row, col];
          switch (ttype) {
             case 0:
@@ -30,10 +30,10 @@ public class MapManager : Singletone<MapManager> {
       Cols = mapmask.GetLength(1);
       Map = new Tile[Rows, Cols];
 
-      Log.Info("cols: " + Cols + " rows: " + Rows);
+      Log.Info(" rows: " + Rows + " cols: " + Cols);
 
-      for (uint r = 0; r < Rows; r++)
-         for (uint c = 0; c < Cols; c++)
+      for (int r = 0; r < Rows; r++)
+         for (int c = 0; c < Cols; c++)
             Map[r, c] = new Tile(r, c, _getType(r, c));
    }
 
