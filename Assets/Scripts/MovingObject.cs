@@ -27,7 +27,7 @@ public class MovingObject : MonoBehaviour {
    }
 
    public void Place(Tile tile) {
-      var worldPos = LevelManager. GetWorldPosition(tile.Position);
+      var worldPos = LevelManager.GetWorldPosition(tile.Position);
 
       CurrentTile = tile;
       CurrentPosition = worldPos;
@@ -50,9 +50,6 @@ public class MovingObject : MonoBehaviour {
 
       pathPos = 0;
       Path = path;
-      //GoalTile = tile;
-      //GoalPosition = LevelManager.GetWorldPosition(GoalTile.Position);
-      NextStep(pathPos);
       return true;
    }
 
@@ -63,7 +60,8 @@ public class MovingObject : MonoBehaviour {
       transform.position = Vector2.MoveTowards(transform.position, GoalPosition, Speed * Time.deltaTime);
 
       if (transform.position.x == GoalPosition.x && transform.position.y == GoalPosition.y) {
-         pathPos++;
+         if (pathPos < Path.Length && CurrentTile == Path[pathPos])
+            pathPos++;
          if (pathPos < Path.Length)
             NextStep(pathPos);
       }
@@ -104,21 +102,21 @@ public class MovingObject : MonoBehaviour {
 
    private void Animate(Point oldPosition, Point newPosition) {
 
-      Action<int, int> _setDirection = (vertical, horisontal) => {
-         myAnimator.SetInteger("Vertical", vertical);
-         myAnimator.SetInteger("Horisontal", horisontal);
+      Action<bool, bool, bool, bool> _setDirection = (left, up, down, right) => {
+         myAnimator.SetBool("up", up);
+         myAnimator.SetBool("left", left);
+         myAnimator.SetBool("down", down);
+         myAnimator.SetBool("right", right);
       };
 
-      if (oldPosition.R < newPosition.R)
-         _setDirection(1, 0);
-
-      else if (oldPosition.R > newPosition.R)
-         _setDirection(-1, 0);
-
-      else if (oldPosition.C < newPosition.C)
-         _setDirection(0, 1);
-
-      else
-         _setDirection(0, -1);
+      var direction = newPosition - oldPosition;
+      if (direction.C < 0) // left
+         _setDirection(true, false, false, false);
+      else if(direction.C > 0) // right
+         _setDirection(false, false, false, true);
+      else if(direction.R < 0) // up
+         _setDirection(false, true, false, false);
+      else // down
+         _setDirection(false, false, true, false);
    }
 }

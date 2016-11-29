@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour {
    }
 
    private void EventManager_OnTileClicked(object sender, TileClickEvent gameEvent) {
-      Log.Info("clicked " + gameEvent.tile.Position.ToString());
+      var ldescr = gameEvent.IsLeftClicked ? " left" : "";
+      var rdescr = gameEvent.IsRightClicked ? " right" : "";
+
+      Log.Info("clicked " + gameEvent.tile.Position.ToString() + ldescr + rdescr);
    }
 
    // Update is called once per frame

@@ -31,6 +31,11 @@ public class Tile {
       EventManager.Instance.TileClicked(this, tcea);
    }
 
+   public void RightMouseClick() {
+      var tcea = new TileClickEvent(this, right: true);
+      EventManager.Instance.TileClicked(this, tcea);
+   }
+
    public void EmptyValues() {
       G = 0;
       H = 0;

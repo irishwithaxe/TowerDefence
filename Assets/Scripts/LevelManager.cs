@@ -4,7 +4,10 @@ using System;
 public class LevelManager : MonoBehaviour {
 
    [SerializeField]
-   private GameObject character = null;
+   private GameObject characterPrefab = null;
+
+   [SerializeField]
+   private GameObject[] monstersPrefab = null;
 
    [SerializeField]
    private GameObject[] floors = null;
@@ -80,7 +83,20 @@ public class LevelManager : MonoBehaviour {
             return floors.GetRandomItem();
 
          default:
-            throw new System.NotImplementedException("Неожиданный тип тайла");
+            throw new NotImplementedException("Неожиданный тип тайла");
+      }
+   }
+
+   public void OnButtonClick(string command) {
+      switch (command) {
+         case "ghost1":
+            PlaceGhost(0);
+            break;
+         case "ghost2":
+            PlaceGhost(1);
+            break;
+         default:
+            break;
       }
    }
 
@@ -92,13 +108,22 @@ public class LevelManager : MonoBehaviour {
    }
 
    private void PlaceCharacter() {
-      var tile = MapManager.Instance.Map[3, 3];
-      var characterPrefab = character;
+      var tile = MapManager.Instance.CharacterStartPos;
       var worldPos = GetWorldPosition(tile.Position);
       var gameobj = Instantiate(characterPrefab, worldPos, Quaternion.identity) as GameObject;
 
-      var goTile = gameobj.GetComponent<CharacterScript>();
-      goTile.Place(tile);
+      var character = gameobj.GetComponent<CharacterScript>();
+      character.Place(tile);
+   }
+
+   private void PlaceGhost(int number) {
+      var tile = MapManager.Instance.MonsterStartPos;
+      var worldPos = GetWorldPosition(tile.Position);
+      var gameobj = Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
+
+      var monster = gameobj.GetComponent<MonsterScript>();
+      monster.Place(tile);
+      monster.TrySetGoal(MapManager.Instance.MonsterGoal);
    }
 
    // Update is called once per frame
