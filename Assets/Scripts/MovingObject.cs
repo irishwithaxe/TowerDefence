@@ -5,12 +5,12 @@ using System;
 public class MovingObject : MonoBehaviour {
    public Tile GoalTile { get; set; }
    public Tile CurrentTile { get; set; }
+   public Vector3 CurrentTilePosition { get; set; }
 
    public Tile[] Path { get; protected set; }
    private int pathPos;
 
    public Vector3 GoalPosition { get; set; }
-   public Vector3 CurrentPosition { get; set; }
 
    public bool IsActive = false;
 
@@ -30,10 +30,10 @@ public class MovingObject : MonoBehaviour {
       var worldPos = LevelManager.GetWorldPosition(tile.Position);
 
       CurrentTile = tile;
-      CurrentPosition = worldPos;
+      CurrentTilePosition = worldPos;
 
-      GoalTile = CurrentTile;
-      GoalPosition = CurrentPosition;
+      GoalTile = tile;
+      GoalPosition = worldPos;
 
       transform.eulerAngles = new Vector3(0, 0, 0);
 
@@ -50,7 +50,21 @@ public class MovingObject : MonoBehaviour {
 
       pathPos = 0;
       Path = path;
+
+      var goalpos = LevelManager.GetWorldPosition(Path[pathPos].Position);
+      var tilegoal = Distance2D(CurrentTilePosition, goalpos);
+      var currgoal = Distance2D(transform.position, goalpos);
+      if (tilegoal < currgoal)
+         NextStep(CurrentTile);
+      else
+         NextStep(Path[pathPos]);
       return true;
+   }
+
+   private double Distance2D(Vector2 v1, Vector2 v2) {
+      var x = Math.Abs(v1.x - v2.x);
+      var y = Math.Abs(v1.y - v2.y);
+      return Math.Pow(x * x + y * y, 0.5);
    }
 
    protected void Move() {
@@ -59,24 +73,32 @@ public class MovingObject : MonoBehaviour {
 
       transform.position = Vector2.MoveTowards(transform.position, GoalPosition, Speed * Time.deltaTime);
 
+      if (CurrentTile != GoalTile) {
+         var tilecur = Distance2D(CurrentTilePosition, transform.position);
+         var goalcur = Distance2D(GoalPosition, transform.position);
+         if (tilecur > goalcur) {
+            CurrentTile = GoalTile;
+            CurrentTilePosition = GoalPosition;
+            //Log.Info("tilecur " + tilecur + " goalcur " + goalcur);
+         }
+      }
+
       if (transform.position.x == GoalPosition.x && transform.position.y == GoalPosition.y) {
-         if (pathPos < Path.Length && CurrentTile == Path[pathPos])
+         if (pathPos < Path.Length && GoalTile == Path[pathPos])
             pathPos++;
          if (pathPos < Path.Length)
-            NextStep(pathPos);
+            NextStep(Path[pathPos]);
       }
    }
 
-   private void NextStep(int pos) {
-      var newPos = Path[pos];
-
+   private void NextStep(Tile newPos) {
+      GoalTile = newPos;
       if (movingType == 0)
-         Animate(CurrentTile.Position, newPos.Position);
+         Animate(CurrentTile.Position, GoalTile.Position);
       if (movingType == 1)
-         Rotate(CurrentTile.Position, newPos.Position);
+         Rotate(CurrentTile.Position, GoalTile.Position);
 
-      CurrentTile = newPos;
-      GoalPosition = LevelManager.GetWorldPosition(newPos.Position);
+      GoalPosition = LevelManager.GetWorldPosition(GoalTile.Position);
    }
 
    private void Rotate(Point oldPosition, Point newPosition) {
@@ -112,11 +134,11 @@ public class MovingObject : MonoBehaviour {
       var direction = newPosition - oldPosition;
       if (direction.C < 0) // left
          _setDirection(true, false, false, false);
-      else if(direction.C > 0) // right
+      else if (direction.C > 0) // right
          _setDirection(false, false, false, true);
-      else if(direction.R < 0) // up
+      if (direction.R < 0) // up
          _setDirection(false, true, false, false);
-      else // down
+      else if (direction.R > 0) // down
          _setDirection(false, false, true, false);
    }
 }
