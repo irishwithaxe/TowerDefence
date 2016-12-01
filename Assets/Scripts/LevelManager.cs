@@ -92,9 +92,6 @@ public class LevelManager : MonoBehaviour {
          case "ghost1":
             PlaceGhost(0);
             break;
-         case "ghost2":
-            PlaceGhost(1);
-            break;
          default:
             EventManager.Instance.MenuClicked(this, new MenuItemClicked(menuItemName));
             break;
