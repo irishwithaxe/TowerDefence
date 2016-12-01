@@ -14,7 +14,7 @@ public class MovingObject : MonoBehaviour {
 
    public bool IsActive = false;
 
-   private Animator myAnimator;
+   protected Animator myAnimator;
 
    [SerializeField]
    protected float Speed = 1f;

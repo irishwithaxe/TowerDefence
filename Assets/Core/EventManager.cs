@@ -11,4 +11,8 @@ public class EventManager : Singletone<EventManager> {
    public event EvArgs<TileClickEvent> OnTileClicked = (s, ge) => { };
 
    public void TileClicked(object sender, TileClickEvent tce) { OnTileClicked(sender, tce); }
+
+   public event EvArgs<MenuItemClicked> OnMenuItemClicked = (s, ea) => { };
+
+   public void MenuClicked(object sender, MenuItemClicked mic) { OnMenuItemClicked(sender, mic); }
 }

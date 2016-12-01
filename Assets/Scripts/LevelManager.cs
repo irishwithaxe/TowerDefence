@@ -87,8 +87,8 @@ public class LevelManager : MonoBehaviour {
       }
    }
 
-   public void OnButtonClick(string command) {
-      switch (command) {
+   public void OnMenuItemClick(string menuItemName) {
+      switch (menuItemName) {
          case "ghost1":
             PlaceGhost(0);
             break;
@@ -96,6 +96,7 @@ public class LevelManager : MonoBehaviour {
             PlaceGhost(1);
             break;
          default:
+            EventManager.Instance.MenuClicked(this, new MenuItemClicked(menuItemName));
             break;
       }
    }
