@@ -7,9 +7,6 @@ public class LevelManager : MonoBehaviour {
    private GameObject characterPrefab = null;
 
    [SerializeField]
-   private GameObject[] monstersPrefab = null;
-
-   [SerializeField]
    private GameObject[] floors = null;
 
    [SerializeField]
@@ -90,7 +87,7 @@ public class LevelManager : MonoBehaviour {
    public void OnMenuItemClick(string menuItemName) {
       switch (menuItemName) {
          case "ghost1":
-            PlaceGhost(0);
+            PlaceGhost();
             break;
          default:
             EventManager.Instance.MenuClicked(this, new MenuItemClicked(menuItemName));
@@ -114,12 +111,13 @@ public class LevelManager : MonoBehaviour {
       character.Place(tile);
    }
 
-   private void PlaceGhost(int number) {
+   private void PlaceGhost() {
       var tile = MapManager.Instance.MonsterStartPos;
       var worldPos = GetWorldPosition(tile.Position);
-      var gameobj = Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
+      var ghost = GameManager.Instance.Pool.GetObject("Ghost1");// Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
+      ghost.transform.position = worldPos;
 
-      var monster = gameobj.GetComponent<MonsterScript>();
+      var monster = ghost.GetComponent<MonsterScript>();
       monster.Place(tile);
       monster.TrySetGoal(MapManager.Instance.MonsterGoal);
    }

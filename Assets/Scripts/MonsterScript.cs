@@ -15,5 +15,10 @@ public class MonsterScript : MovingObject {
    // Update is called once per frame
    void Update() {
       Move();
+
+      if(CurrentTile == GoalTile) {
+         IsActive = false;
+         GameManager.Instance.Pool.ReleaseGameObject(gameObject);
+      }
    }
 }

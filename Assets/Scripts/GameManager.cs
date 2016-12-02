@@ -2,6 +2,22 @@
 
 public class GameManager : MonoBehaviour {
 
+   private static GameManager _inst = null;
+   public static GameManager Instance {
+      get {
+         if (_inst == null) {
+            _inst = FindObjectOfType<GameManager>();
+         }
+         return _inst;
+      }
+   }
+
+   public ObjectPool Pool { get; private set; }
+
+   public void Awake() {
+      Pool = GetComponent<ObjectPool>();
+   }
+
    // Use this for initialization
    private void Start() {
       EventManager.Instance.OnTileClicked += EventManager_OnTileClicked;

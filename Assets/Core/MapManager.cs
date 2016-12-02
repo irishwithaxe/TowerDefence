@@ -8,16 +8,16 @@ public class MapManager : Singletone<MapManager> {
 
    private Random rnd = new Random();
 
-   public Tile CharacterStartPos { get { return Map[5, 7]; } }
-   public Tile MonsterStartPos { get { if (rnd.Next(2) == 1) return Map[7, 1]; return Map[1, 1]; } }
-   public Tile MonsterGoal { get { return Map[9, 16]; } }
+   public Tile CharacterStartPos { get { return Map[4, 4]; } }
+   public Tile MonsterStartPos { get { if (rnd.NextDouble() > 0.5) return Map[1, 1]; return Map[7, 1]; } }
+   public Tile MonsterGoal { get { return Map[4, 1]; } }
 
    public override MapManager Init() {
       return this;
    }
 
    public void MakeMap() {
-      var mapmask = map1;
+      var mapmask = map2;
       Func<int, int, TileType> _getType = (row, col) => {
          var ttype = mapmask[row, col];
          switch (ttype) {
@@ -56,5 +56,18 @@ public class MapManager : Singletone<MapManager> {
       {0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,0,0,0}, // 8
       {0,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,0}, // 9
       {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, // 0
+   };
+
+   private int[,] map2 = new[,] {
+     //0 1 2 3 4 5 6 7 
+      {0,0,0,0,0,0,0,0}, // 0
+      {0,1,1,1,1,1,1,0}, // 1
+      {0,0,0,0,0,0,1,0}, // 2
+      {0,1,1,1,1,1,1,0}, // 3
+      {0,1,0,1,1,1,1,0}, // 4
+      {0,1,1,1,1,1,1,0}, // 5
+      {0,0,0,0,0,0,1,0}, // 6
+      {0,1,1,1,1,1,1,0}, // 7
+      {0,0,0,0,0,0,0,0}  // 8
    };
 }
