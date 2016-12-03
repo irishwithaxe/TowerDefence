@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MonsterScript : MovingObject {
 
@@ -17,8 +18,13 @@ public class MonsterScript : MovingObject {
       Move();
 
       if(CurrentTile == GoalTile) {
+         GoalReached();
          IsActive = false;
          GameManager.Instance.Pool.ReleaseGameObject(gameObject);
       }
+   }
+
+   public override void GoalReached() {
+      Log.Info("monster arrives");
    }
 }

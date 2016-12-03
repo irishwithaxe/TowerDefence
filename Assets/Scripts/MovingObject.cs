@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class MovingObject : MonoBehaviour {
+public abstract class MovingObject : MonoBehaviour {
    public Tile GoalTile { get; set; }
    public Tile NextStepTile { get; set; }
    public Tile CurrentTile { get; set; }
@@ -70,7 +70,7 @@ public class MovingObject : MonoBehaviour {
    }
 
    protected void Move() {
-      if (!IsActive || Path == null || Path.Length == 0)
+      if (!IsActive || Path == null || Path.Length == 0 || pathPos == Path.Length)
          return;
 
       transform.position = Vector2.MoveTowards(transform.position, NextStepPosition, Speed * Time.deltaTime);
@@ -89,8 +89,12 @@ public class MovingObject : MonoBehaviour {
             pathPos++;
          if (pathPos < Path.Length)
             NextStep(Path[pathPos]);
+         if (pathPos == Path.Length)
+            GoalReached();
       }
    }
+
+   public abstract void GoalReached();
 
    private void NextStep(Tile newPos) {
       NextStepTile = newPos;

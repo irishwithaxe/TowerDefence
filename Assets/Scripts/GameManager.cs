@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
       var ldescr = gameEvent.IsLeftClicked ? " left" : "";
       var rdescr = gameEvent.IsRightClicked ? " right" : "";
 
-      Log.Info("clicked " + gameEvent.tile.Position.ToString() + ldescr + rdescr);
+      Log.Info("EventManager_OnTileClicked " + gameEvent.tile.Position.ToString() + ldescr + rdescr);
    }
 
    // Update is called once per frame
