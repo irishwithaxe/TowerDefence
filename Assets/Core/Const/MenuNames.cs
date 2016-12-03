@@ -7,15 +7,15 @@ public static class MenuNames {
    /// <summary>
    /// Команда двигаться
    /// </summary>
-   public static readonly string movebtn = "movebutton";
+   public const string movebtn = "movebutton";
 
    /// <summary>
    /// Команда поставить руну огня
    /// </summary>
-   public static readonly string runefire = "runefire";
+   public const string runefire = "runefire";
 
    /// <summary>
    /// Команда запустить огненный шар
    /// </summary>
-   public static readonly string prjcfire = "projectlefire";
+   public const string prjcfire = "projectlefire";
 }

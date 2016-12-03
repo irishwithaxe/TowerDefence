@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour {
    private void PlaceGhost() {
       var tile = MapManager.Instance.MonsterStartPos;
       var worldPos = GetWorldPosition(tile.Position);
-      var ghost = GameManager.Instance.Pool.GetObject("Ghost1");// Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
+      var ghost = GameManager.Instance.Pool.GetObject(PrefabNames.Ghost1);// Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
       ghost.transform.position = worldPos;
 
       var monster = ghost.GetComponent<MonsterScript>();

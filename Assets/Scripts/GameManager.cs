@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
    // Use this for initialization
    private void Start() {
-      EventManager.Instance.OnTileClicked += EventManager_OnTileClicked;
+      //EventManager.Instance.OnTileClicked += EventManager_OnTileClicked;
    }
 
    private void EventManager_OnTileClicked(object sender, TileClickEvent gameEvent) {

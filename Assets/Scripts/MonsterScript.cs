@@ -17,14 +17,18 @@ public class MonsterScript : MovingObject {
    void Update() {
       Move();
 
-      if(CurrentTile == GoalTile) {
+      if (CurrentTile == GoalTile) {
          GoalReached();
          IsActive = false;
          GameManager.Instance.Pool.ReleaseGameObject(gameObject);
       }
    }
 
+   public void TakeDamage(float damage) {
+      Log.Info("damaged for {0}".F(damage));
+   }
+
    public override void GoalReached() {
-      Log.Info("monster arrives");
+      //Log.Info("monster arrives");
    }
 }

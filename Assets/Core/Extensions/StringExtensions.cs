@@ -10,4 +10,8 @@ public static class StringExtensions {
          return format + " exception: " + ex.Message;
       }
    }
+
+   public static bool HasValue(this string str) {
+      return !string.IsNullOrEmpty(str);
+   }
 }

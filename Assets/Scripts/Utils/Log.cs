@@ -2,6 +2,8 @@
 using UnityEngine;
 
 public static class Log {
+   private static long row = 0;
+
    [MethodImpl(MethodImplOptions.NoInlining)]
    public static string GetMethodName(int frames) {
       System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace();
@@ -12,6 +14,6 @@ public static class Log {
 
    [MethodImpl(MethodImplOptions.NoInlining)]
    public static void Info(string message, params object[] objs) {
-      Debug.Log(GetMethodName(2) + ": " + message.F(objs));
+      Debug.Log(row++ + ". " + GetMethodName(2) + ": " + message.F(objs));
    }
 }
