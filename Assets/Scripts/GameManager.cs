@@ -12,10 +12,16 @@ public class GameManager : MonoBehaviour {
       }
    }
 
-   public ObjectPool Pool { get; private set; }
+   public static ObjectPool Pool {
+      get {
+         return Instance.ObjPool;
+      }
+   }
+
+   public ObjectPool ObjPool { get; private set; }
 
    public void Awake() {
-      Pool = GetComponent<ObjectPool>();
+      ObjPool = GetComponent<ObjectPool>();
    }
 
    // Use this for initialization

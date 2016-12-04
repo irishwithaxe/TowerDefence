@@ -36,8 +36,9 @@ public class CharacterScript : MovingObject {
       }
 
       if (gameEvent.tile.Type == TileType.floor && RuneForSet.HasValue()) {
-         var rune = GameManager.Instance.Pool.GetObject(RuneForSet);
-         rune.transform.position = LevelManager.GetWorldPosition(gameEvent.tile.Position);
+         var rune = GameManager.Pool.GetObject(RuneForSet);
+         var runescript = rune.GetComponent<RuneScript>();
+         runescript.Place(gameEvent.tile, LevelManager.GetWorldPosition(gameEvent.tile.Position));
          RuneForSet = null;
       }
    }

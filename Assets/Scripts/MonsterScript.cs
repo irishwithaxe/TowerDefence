@@ -4,9 +4,18 @@ using System;
 
 public class MonsterScript : MovingObject {
 
-   // Use this for initialization
-   void Start() {
+   [SerializeField]
+   private float startHealth;
 
+   // This function is called when the object becomes enabled and active
+   private void OnEnable() {
+      health = startHealth;
+   }
+
+   private float health;
+
+   public bool IsDead {
+      get { return health <= 0f; }
    }
 
    public void TrySetGoal(Tile tile) {
@@ -19,13 +28,19 @@ public class MonsterScript : MovingObject {
 
       if (CurrentTile == GoalTile) {
          GoalReached();
-         IsActive = false;
-         GameManager.Instance.Pool.ReleaseGameObject(gameObject);
+         Die();
       }
    }
 
+   private void Die() {
+      IsActive = false;
+      GameManager.Pool.ReleaseGameObject(gameObject);
+   }
+
    public void TakeDamage(float damage) {
-      Log.Info("damaged for {0}".F(damage));
+      health -= damage;
+         if (IsDead)
+            Die();
    }
 
    public override void GoalReached() {

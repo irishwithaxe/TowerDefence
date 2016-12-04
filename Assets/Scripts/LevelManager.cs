@@ -23,24 +23,24 @@ public class LevelManager : MonoBehaviour {
    private int cols { get { return MapManager.Instance.Cols; } }
 
    private static Vector3 leftTop;
-   private static float tileSize;
+   public static float TileSize { get; private set; }
 
    // Awake is called when the script instance is being loaded
    public void Awake() {
       leftTop = CameraManager.CamToWorld(new Vector3(0f, Screen.height));
       leftTop.z = 0;
 
-      tileSize = floors[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+      TileSize = floors[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
    }
 
    private void SetCameraLimits() {
       var lt = leftTop;
-      lt.x -= tileSize / 2;
-      lt.y += tileSize / 2;
+      lt.x -= TileSize / 2;
+      lt.y += TileSize / 2;
 
       var br = map[rows - 1, cols - 1].GetComponent<TileScript>().WorldPosition;
-      br.x += tileSize / 2;
-      br.y -= tileSize / 2;
+      br.x += TileSize / 2;
+      br.y -= TileSize / 2;
 
       camManager.SetLimits(lt, br);
    }
@@ -66,8 +66,8 @@ public class LevelManager : MonoBehaviour {
 
    public static Vector3 GetWorldPosition(Point position) {
       var lt = leftTop;
-      lt.x += position.C * tileSize + tileSize / 2;
-      lt.y -= position.R * tileSize + tileSize / 2;
+      lt.x += position.C * TileSize + TileSize / 2;
+      lt.y -= position.R * TileSize + TileSize / 2;
       return lt;
    }
 
@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour {
    private void PlaceGhost() {
       var tile = MapManager.Instance.MonsterStartPos;
       var worldPos = GetWorldPosition(tile.Position);
-      var ghost = GameManager.Instance.Pool.GetObject(PrefabNames.Ghost1);// Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
+      var ghost = GameManager.Pool.GetObject(PrefabNames.Ghost1);// Instantiate(monstersPrefab[number], worldPos, Quaternion.identity) as GameObject;
       ghost.transform.position = worldPos;
 
       var monster = ghost.GetComponent<MonsterScript>();

@@ -17,9 +17,7 @@ public class RuneActivatedScript : StateMachineBehaviour {
    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
       var rs = animator.GetComponent<RuneScript>();
       if (rs != null)
-         Log.Info("yes!!");
-      else
-         Log.Info(".. doh!");
+         rs.AfterActivated();
    }
 
    // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
