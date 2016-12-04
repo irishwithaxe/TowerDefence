@@ -8,10 +8,10 @@ public class RuneScript : MonoBehaviour {
    protected string ChildRuneName;
 
    [SerializeField]
-   private float damage;
-
+   private float damage = 1f;
+   
    [SerializeField]
-   private float manaCost;
+   private float manaCost = 1f;
 
    public Tile Tile { get; private set; }
    public float Mana { get; private set; }
@@ -43,8 +43,9 @@ public class RuneScript : MonoBehaviour {
    public void Place(Tile tile, Vector3 worldPos, float mana) {
       Tile = tile;
       transform.position = worldPos;
-      MaxMana = mana;
+
       Mana = mana;
+      MaxMana = mana;
    }
 
    public void AfterActivated() {

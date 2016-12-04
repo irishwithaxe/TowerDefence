@@ -5,7 +5,7 @@ using System;
 public class MonsterScript : MovingObject {
 
    [SerializeField]
-   private float startHealth;
+   private float startHealth = 1f;
 
    // This function is called when the object becomes enabled and active
    private void OnEnable() {

@@ -28,19 +28,33 @@ public class CharacterScript : MovingObject {
       }
    }
 
+
    private void EventManager_OnTileClicked(object sender, TileClickEvent gameEvent) {
       if (gameEvent.tile.Type == TileType.floor && IsReadyForSetGoal) {
          TrySetGoal(gameEvent.tile, (t) => t.Type == TileType.floor ? true : false);
-         IsCast = !IsCast;
          IsReadyForSetGoal = false;
       }
 
       if (gameEvent.tile.Type == TileType.floor && RuneForSet.HasValue()) {
-         var rune = GameManager.Pool.GetObject(RuneForSet);
-         var runescript = rune.GetComponent<RuneScript>();
-         runescript.Place(gameEvent.tile, LevelManager.GetWorldPosition(gameEvent.tile.Position), 10);
-         RuneForSet = null;
+         StartCoroutine(CastRune(0.4f, gameEvent));
       }
+   }
+
+   private IEnumerator CastRune(float castTime, TileClickEvent gameEvent) {
+      IsCast = true;
+
+      var lightning = GameManager.Pool.GetObject(PrefabNames.Lightning);
+      lightning.transform.position = LevelManager.GetWorldPosition(gameEvent.tile.Position);
+
+      yield return new WaitForSeconds(castTime);
+
+      GameManager.Pool.ReleaseGameObject(lightning);
+      IsCast = false;
+
+      var rune = GameManager.Pool.GetObject(RuneForSet);
+      var runescript = rune.GetComponent<RuneScript>();
+      runescript.Place(gameEvent.tile, LevelManager.GetWorldPosition(gameEvent.tile.Position), 10);
+      RuneForSet = null;
    }
 
    private bool IsCast {
